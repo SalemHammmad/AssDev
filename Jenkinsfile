@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("my-java-app:latest", "-f Dockerfile .")
+                    docker.build("my-java-app:latest", "-f dockerfile .")
                 }
             }
         }
