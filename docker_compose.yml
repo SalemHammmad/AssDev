@@ -1,14 +1,28 @@
 version: '3.9'
 
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      - "MYSQL_DATABASE=webser"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
     ports:
-      - "8080:8080"
+      - "127.0.0.1:3307:3306"
     volumes:
-      - "jenkins_home:/var/jenkins_home"
 
-volumes:
-  jenkins_home:
-    driver: local
+  app:
+    image: 'rest-api:latest'
+    container_name: rest-api
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3307/orderManagement?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=9091
+    ports:
+      - "127.0.0.1:9000:8080"
