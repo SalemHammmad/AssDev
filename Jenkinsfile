@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class CarTest --test-dir="test"' 
+                    sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class SuspiciousEventsServiceTest --test-dir="test"' 
                 }
             }
         }
