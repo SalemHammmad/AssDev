@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SalemHammmad/AssDev.git'
             }
         }
-        sstage('Test') {
+        stage('Test') {
             steps {
                 // Run automated tests
                 sh 'mvn test'
