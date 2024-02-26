@@ -1,11 +1,28 @@
 pipeline {
       agent {
-        docker {
-            image 'maven:latest'
-            args '-v /src/main/java -v  /src/main/java:/root/.m2 -w /usr/src/mymaven'
+         docker {
+            image 'docker:20.10.8'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+
+
+
 stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("my-java-app:latest", "-f Dockerfile .")
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.image("my-java-app:latest").run("--rm -d -p 8080:8080 my-java-app:latest")
+                }
+            }
+        }
     stage('Clone') {
         steps {
             git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SalemHammmad/AssDev.git'
