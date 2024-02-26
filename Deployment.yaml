@@ -1,27 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins
+  name: my-app-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: jenkins
+      app: my-app
   template:
     metadata:
       labels:
-        app: jenkins
+        app: my-app
     spec:
       containers:
-      - name: jenkins
-        image: jenkins/jenkins:lts
-        ports:
-        - containerPort: 8080
-        - containerPort: 50000
-        volumeMounts:
-        - name: jenkins-home
-          mountPath: /var/jenkins_home
-      volumes:
-      - name: jenkins-home
-        emptyDir: {}
-
+        - name: my-app
+          image: my-docker-registry/my-app:latest
+          ports:
+            - containerPort: 8080
