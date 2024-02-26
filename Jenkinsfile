@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+      agent {
+        docker {
+            image 'maven:latest'
+            args '-v /path/to/your/maven/project:/usr/src/mymaven -w /usr/src/mymaven'
+        }
+    }
 stages {
     stage('Clone') {
         steps {
