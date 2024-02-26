@@ -2,7 +2,7 @@ pipeline {
       agent {
         docker {
             image 'maven:latest'
-            args '-v /path/to/your/maven/project:/usr/src/mymaven -w /usr/src/mymaven'
+            args '-v /src/main/java/controller -w /usr/src/mymaven'
         }
     }
 stages {
