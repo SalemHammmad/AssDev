@@ -20,8 +20,7 @@ stages {
     stages('test') {
         steps{
             script{
-                sh 'make check'
-                junit './test/SupiciousEventsServiceTest.java' 
+                sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class CarTest --test-dir="test"' 
             }
         }
     }
@@ -38,6 +37,7 @@ stages {
         steps {
             script {
             sh 'kubectl apply -f Deployment.yaml'
+            sh 'kubectl apply -f service.yaml'
             }
         }
     }
