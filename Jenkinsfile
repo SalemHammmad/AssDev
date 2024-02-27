@@ -7,6 +7,13 @@ pipeline {
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SalemHammmad/AssDev.git'
             }
         }
+        stage('Test') {
+            steps {
+                script {
+                    sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class SuspiciousEventsServiceTest --test-dir="test"' 
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -14,17 +21,10 @@ pipeline {
                 }
             }
         }
-        stage('Run Docker Container') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.image("my-java-app:latest").run("-d -p 8080:8080 my-java-app:latest")
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class SuspiciousEventsServiceTest --test-dir="test"' 
+                    docker.build("my-java-app:latest", "-f dockerfile .")
                 }
             }
         }
