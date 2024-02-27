@@ -10,7 +10,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class SuspiciousEventsServiceTest --test-dir="test"' 
+                    sh 'cd src/ ; java -jar ./src/test/SuspiciousEventsServiceTest.java -cp "." --select-class SuspiciousEventsServiceTest --test-dir="test"' 
                 }
             }
         }
