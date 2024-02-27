@@ -8,13 +8,13 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("my-java-app:latest", "-f Dockerfile .")
-                }
-            }
+      stage('Build Docker Image') {
+    steps {
+        script {
+            docker.build("my-java-app:latest", "-f src/Dockerfile .")
         }
+    }
+}
 
         stage('Test') {
             steps {
