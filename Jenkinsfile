@@ -21,12 +21,14 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+       stage('Push Docker Image') {
             steps {
                 script {
-                    docker.build("my-java-app:latest", "-f dockerfile .")
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials-id') {
+                    docker.image("my-java-app:latest").push()
                 }
             }
+        }
         }
         stage('Deploy to Kubernetes') {
             steps {
