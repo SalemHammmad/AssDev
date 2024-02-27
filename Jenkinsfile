@@ -10,7 +10,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'cd src/ ; javac ./test/SuspiciousEventsServiceTest.java -cp "." --select-class SuspiciousEventsServiceTest' 
+                    sh 'cd src/ ; javac .src/test/service/SuspiciousEventsServiceTest.java -cp "." --select-class SuspiciousEventsServiceTest' 
                 }
             }
         }
