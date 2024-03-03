@@ -21,7 +21,9 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'maven/mvn test'
+                    withMaven(maven: 'maven') {
+                        sh 'mvn test'
+                    }
                 }
             }
         }
