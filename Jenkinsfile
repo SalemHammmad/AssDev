@@ -11,12 +11,10 @@ pipeline {
     stage('Build Docker Image') {
     steps {
         script {
-            docker.build("my-java-app:latest", "-f Dockerfile .")
+            docker.build("jenkins:latest", "-f dockerfile .")
+        }
         }
     }
-}
-
-
         stage('Test') {
             steps {
                 script {
@@ -29,7 +27,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials-id') {
-                        docker.image("my-java-app:latest").push()
+                        docker.image("jenkins:latest").push()
                     }
                 }
             }
