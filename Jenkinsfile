@@ -12,7 +12,7 @@ pipeline {
     steps {
         script {
             docker.build("jenkins:latest", "-f dockerfile .")
-        }
+            }
         }
     }
         stage('Test') {
