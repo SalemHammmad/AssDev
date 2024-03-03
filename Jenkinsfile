@@ -1,5 +1,8 @@
 pipeline {
     agent any
+     tools {
+    maven 'maven-3.8.4' 
+  }
 
     stages {
         stage('Clone') {
@@ -19,7 +22,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'Maven/mvn test'
+                    sh 'maven/mvn test'
                 }
             }
         }
