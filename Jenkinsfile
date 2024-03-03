@@ -11,14 +11,14 @@ pipeline {
     stage('Build Docker Image') {
     steps {
         script {
-            docker.build("jenkins:latest", "-f dockerfile .")
+            docker.build("my-app-image:latest", "-f dockerfile .")
             }
         }
     }
         stage('Test') {
             steps {
                 script {
-                    sh 'cd src && mvn test'
+                    sh 'mvn test'
                 }
             }
         }
@@ -27,17 +27,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials-id') {
-                        docker.image("jenkins:latest").push()
+                        docker.image("my-app-image:latest").push()
                     }
-                }
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    sh 'kubectl apply -f Deployment.yaml'
-                    sh 'kubectl apply -f Service.yaml'
                 }
             }
         }
