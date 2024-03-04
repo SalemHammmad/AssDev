@@ -18,7 +18,7 @@ pipeline {
             }
         }
     }
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 script {
                     withMaven(maven: 'maven') {
@@ -26,12 +26,11 @@ pipeline {
                     }
                 }
             }
-        }
-
+        }*/
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials-id') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dc2cd4bc-7254-4f66-8c18-958b2ca55193') {
                         docker.image("my-app-image:latest").push()
                     }
                 }
