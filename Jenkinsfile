@@ -30,7 +30,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/', 'dc2cd4bc-7254-4f66-8c18-958b2ca55193') {
+                    docker.withRegistry('', 'dc2cd4bc-7254-4f66-8c18-958b2ca55193') {
                         docker.image("my-app-image:latest").push()
                     }
                 }
