@@ -14,7 +14,7 @@ pipeline {
     stage('Build Docker Image') {
     steps {
         script {
-            docker.build("my-app-image:latest", "-f dockerfile .")
+            docker.build("salemhammad24/newapp:latest", "-f dockerfile .")
             }
         }
     }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dc2cd4bc-7254-4f66-8c18-958b2ca55193') {
-                        docker.image("my-app-image:latest").push()
+                        docker.image("salemhammad24/newapp:latest").push()
                     }
                 }
             }
