@@ -1,27 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-image
+  name: newapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app-image
+      app: newapp
   template:
     metadata:
       labels:
-        app: my-app-image
+        app: newapp
     spec:
       containers:
-      - name: my-app-image
-        image: my-app-image/my-app-image:lts
-        ports:
-        - containerPort: 8080
-        - containerPort: 50000
-        volumeMounts:
-        - name: my-app-image-home
-          mountPath: /var/my-app-image-home
-      volumes:
-      - name: my-app-image-home
-        emptyDir: {}
-
+        - name: newapp
+          image: salemhammad24/newapp:latest
+          ports:
+            - containerPort: 8080
